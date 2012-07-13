@@ -1,0 +1,7 @@
+task :default => :bench
+
+task :bench do
+  sh "mysql -uroot counters < setup.sql" 
+  sh "ruby bench.rb"
+end
+

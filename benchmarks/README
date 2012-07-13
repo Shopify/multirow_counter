@@ -1,0 +1,8 @@
+# How to run the benchmarks
+
+1. Create yourself a new DB called 'counters'
+2. Run the setup.sql script against that DB
+  $ mysql -uroot counters < setup.sql
+3. Run the benchmark file
+  $ ruby bench.rb
+

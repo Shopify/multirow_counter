@@ -1,3 +1,5 @@
+require 'multirow_counter/counter_model_creator'
+
 module MultirowCounter
   module Extension
     def multirow_counter(counter_name, options)
@@ -21,14 +23,6 @@ module MultirowCounter
         const.where(class_name.foreign_key => id).where(:counter_id => rand(3)+1).limit(1).update_all("value = value+1")
       end
 
-    end
-  end
-
-  class CounterModelCreator < Struct.new(:counter_name, :class_name)
-    def create
-      counter_class = Class.new(ActiveRecord::Base)
-      const_name = [class_name, counter_name.classify].join
-      MultirowCounter.const_set(const_name, counter_class)
     end
   end
 

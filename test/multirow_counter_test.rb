@@ -29,5 +29,13 @@ describe MultirowCounter do
     shop_versions = MultirowCounter::ShopVersion.where(:shop_id => @shop.id)
     refute shop_versions.any? { |v| v.value == 10 }
   end
+
+  it "requires the number of rows to be specified" do
+    class Foo < ActiveRecord::Base
+      lambda { 
+        multirow_counter :the_count, :random => 'oops'
+      }.must_raise ArgumentError
+    end
+  end
 end
 

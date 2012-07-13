@@ -1,6 +1,6 @@
 
 Gem::Specification.new do |s|
-  s.name        = "multirow-counter"
+  s.name        = "multirow_counter"
   s.version     = "0.0.1"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Jesse Storimer"]

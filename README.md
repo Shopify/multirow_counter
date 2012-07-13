@@ -18,7 +18,13 @@ Bring the gem into your project:
 gem 'multirow-counter'
 ```
 
-You can use this with your ActiveRecord models with the following syntax
+Generate a new counter for a given model:
+
+``` console
+$ rails generate multirow_counter shop version 3
+```
+
+This will create the required migration and add the following delcaration to the Shop model:
 
 ``` ruby
 class Shop < ActiveRecord::Base

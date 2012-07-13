@@ -4,8 +4,8 @@ module MultirowCounter
       class_name = self.name
       num_rows = options[:rows] || raise(ArgumentError, "You need to specify how many rows will be used eg. :rows => 3")
 
-      builder = Builder.new(counter_name.to_s, class_name, options)
-      const = builder.create_counter_model
+      creator = CounterModelCreator.new(counter_name.to_s, class_name)
+      const = creator.create
 
       # define getter method
       define_method(counter_name) do
@@ -24,11 +24,9 @@ module MultirowCounter
     end
   end
 
-  class Builder < Struct.new(:counter_name, :class_name, :options)
-    def create_counter_model
-      counter_class = Class.new(ActiveRecord::Base) do
-      end
-
+  class CounterModelCreator < Struct.new(:counter_name, :class_name)
+    def create
+      counter_class = Class.new(ActiveRecord::Base)
       const_name = [class_name, counter_name.classify].join
       MultirowCounter.const_set(const_name, counter_class)
     end

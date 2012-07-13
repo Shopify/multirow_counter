@@ -2,7 +2,7 @@ require 'benchmark'
 require 'thread'
 require 'mysql2'
 
-CONCURRENCY = 100
+CONCURRENCY = 150
 ITERATIONS = 100
 
 def query(sql)

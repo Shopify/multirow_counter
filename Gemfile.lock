@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    multirow-counter (0.0.1)
+    multirow_counter (0.0.1)
       activerecord
 
 GEM
@@ -29,5 +29,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  multirow-counter!
+  multirow_counter!
   mysql2

@@ -37,5 +37,9 @@ describe MultirowCounter do
       }.must_raise ArgumentError
     end
   end
+
+  it "defines a second obscure getter" do
+    @shop.multirow_counter_version.must_equal @shop.version
+  end
 end
 

@@ -8,10 +8,13 @@ module MultirowCounter
       const = creator.create
 
       # define getter method
-      define_method(counter_name) do
+      getter = lambda do
         counter_relation = const.where(class_name.foreign_key => id)
         counter_relation.sum(:value)
       end
+
+      define_method(counter_name, &getter)
+      define_method("multirow_counter_#{counter_name}", &getter)
 
       # define increment method
       define_method("increment_#{counter_name}") do

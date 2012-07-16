@@ -13,7 +13,11 @@ class Add<%= counter_name.classify %>CounterTo<%= model_name.classify %> < Activ
     # You may want to consider moving this into a background task if it takes too long
     <%= model_name.classify %>.find_each do |<%= model_name %>|
       1.upto(<%= number_of_counter_rows %>) do |num|
-        MultirowCounter::<%= model_name.classify %><%= counter_name.classify %>.create!(:<%= model_name %>_id => <%= model_name %>.id, :counter_id => num, :value => 0)
+        MultirowCounter::<%= model_name.classify %><%= counter_name.classify %>.create! do |row|
+          row.<%= model_name %>_id = <%= model_name %>.id
+          row.counter_id = num
+          row.value = 0
+        end
       end
     end
   end

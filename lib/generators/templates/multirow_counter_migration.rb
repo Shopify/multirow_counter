@@ -1,4 +1,4 @@
-class Add<%= counter_name.classify %>CounterTo<%= model_name.classify %>Migration < ActiveRecord::Migration
+class Add<%= counter_name.classify %>CounterTo<%= model_name.classify %> < ActiveRecord::Migration
 
   def up
     create_table :<%= [model_name, counter_name].join('_').tableize %> do |t|

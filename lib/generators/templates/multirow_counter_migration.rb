@@ -1,6 +1,6 @@
 class Add<%= counter_name.classify %>CounterTo<%= model_name.classify %> < ActiveRecord::Migration
 
-  def up
+  def self.up
     create_table :<%= [model_name, counter_name].join('_').tableize %> do |t|
       t.integer :id
       t.integer :<%= model_name %>_id
@@ -18,7 +18,7 @@ class Add<%= counter_name.classify %>CounterTo<%= model_name.classify %> < Activ
     end
   end
 
-  def down
+  def self.down
     drop_table :<%= [model_name, counter_name].join('_').tableize %>
   end
 end

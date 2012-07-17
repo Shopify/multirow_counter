@@ -17,11 +17,11 @@ module MultirowCounter
       define_method("multirow_counter_#{counter_name}", &getter)
 
       # define increment method
-      define_method("increment_#{counter_name}") do
+      define_method("increment_#{counter_name}") do |incr = 1|
         counter_relation = const.where(class_name.foreign_key => id)
         randomly_selected_counter_row = rand(num_rows) + 1
 
-        counter_relation.where(:counter_id => randomly_selected_counter_row).limit(1).update_all("value = value+1")
+        counter_relation.where(:counter_id => randomly_selected_counter_row).limit(1).update_all("value = value+#{Integer(incr)}")
       end
     end
   end

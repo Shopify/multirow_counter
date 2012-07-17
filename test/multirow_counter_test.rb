@@ -23,6 +23,11 @@ describe MultirowCounter do
     assert_equal 10, @shop.version
   end
 
+  it "supports batch increments" do
+    @shop.increment_version(10)
+    assert_equal 10, @shop.version
+  end
+
   it "should not send all increments to the same row" do
     10.times { @shop.increment_version }
 

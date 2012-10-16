@@ -36,8 +36,8 @@ Then you can use it like so:
 
 ``` ruby
 shop = Shop.find(1)
-shop.increment_version!
-shop.increment_version!
+shop.new_version!
+shop.new_version!
 shop.version #=> 2
 ```
 

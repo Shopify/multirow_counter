@@ -8,7 +8,7 @@ class Add<%= counter_name.classify %>CounterTo<%= model_name.classify %> < Activ
       t.integer :value
     end
 
-    add_index :<%= [model_name, counter_name].join('_').tableize %>, :<%= model_name %>_id
+    add_index :<%= [model_name, counter_name].join('_').tableize %>, [:<%= model_name %>_id, :counter_id], :unique => true
 
     # You may want to consider moving this into a background task if it takes too long
     <%= model_name.classify %>.find_each do |<%= model_name %>|

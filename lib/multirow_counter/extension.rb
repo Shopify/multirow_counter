@@ -21,7 +21,15 @@ module MultirowCounter
         counter_relation = const.where(class_name.foreign_key => id)
         randomly_selected_counter_row = rand(num_rows) + 1
 
-        counter_relation.where(:counter_id => randomly_selected_counter_row).limit(1).update_all("value = value+#{Integer(incr)}")
+        val = counter_relation.where(:counter_id => randomly_selected_counter_row).limit(1).update_all("value = value+#{Integer(incr)}")
+
+        if val == 0 # row doesn't exist. We create it instead.
+          counter_relation.connection.execute <<-SQL
+            INSERT INTO #{const.table_name} (#{class_name.foreign_key}, counter_id, value)
+              VALUES (#{id}, #{randomly_selected_counter_row}, #{Integer(incr)})
+              ON DUPLICATE KEY UPDATE value=value+#{Integer(incr)};
+          SQL
+        end
       end
     end
   end

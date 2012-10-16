@@ -17,7 +17,7 @@ module MultirowCounter
       define_method("multirow_counter_#{counter_name}", &getter)
 
       # define increment method
-      define_method("increment_#{counter_name}") do |incr = 1|
+      define_method("new_#{counter_name}!") do |incr = 1|
         counter_relation = const.where(class_name.foreign_key => id)
         randomly_selected_counter_row = rand(num_rows) + 1
 

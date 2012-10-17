@@ -1,25 +1,14 @@
 class Add<%= counter_name.classify %>CounterTo<%= model_name.classify %> < ActiveRecord::Migration
 
   def self.up
-    create_table :<%= [model_name, counter_name].join('_').tableize %> do |t|
-      t.integer :id
-      t.integer :<%= model_name %>_id
-      t.integer :counter_id
-      t.integer :value
-    end
-
-    add_index :<%= [model_name, counter_name].join('_').tableize %>, [:<%= model_name %>_id, :counter_id], :unique => true
-
-    # You may want to consider moving this into a background task if it takes too long
-    <%= model_name.classify %>.find_each do |<%= model_name %>|
-      1.upto(<%= number_of_counter_rows %>) do |num|
-        MultirowCounter::<%= model_name.classify %><%= counter_name.classify %>.create! do |row|
-          row.<%= model_name %>_id = <%= model_name %>.id
-          row.counter_id = num
-          row.value = 0
-        end
-      end
-    end
+    execute <<-SQL
+      CREATE TABLE <%= [model_name, counter_name].join('_').tableize %> (
+        <%= model_name %>_id INT     NOT NULL,
+        counter_id           TINYINT NOT NULL,
+        value                INT     NOT NULL,
+        PRIMARY KEY (<%= model_name %>_id, counter_id)
+      )
+    SQL
   end
 
   def self.down

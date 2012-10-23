@@ -9,9 +9,10 @@ module MultirowCounter
 
       # define getter method
       getter = lambda do
-        ActiveRecord::Base.connection.select_value <<-SQL
+        val = ActiveRecord::Base.connection.select_value <<-SQL
           SELECT IFNULL(SUM(value),0) FROM #{table_name} WHERE #{assoc}=#{self.id}
         SQL
+        val.to_i
       end
 
       define_method(counter_name, &getter)

@@ -10,7 +10,7 @@ module MultirowCounter
       # define getter method
       getter = lambda do
         ActiveRecord::Base.connection.select_value <<-SQL
-          SELECT SUM(value) FROM #{table_name} WHERE #{assoc}=#{self.id}
+          SELECT IFNULL(SUM(value),0) FROM #{table_name} WHERE #{assoc}=#{self.id}
         SQL
       end
 

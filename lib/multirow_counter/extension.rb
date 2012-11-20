@@ -25,6 +25,7 @@ module MultirowCounter
 
       # define increment method
       define_method("new_#{counter_name}!") do |incr = 1|
+        ivar_name = "@#{counter_name}"
         if x = instance_variable_get(ivar_name)
           instance_variable_set(ivar_name, x + incr)
         end

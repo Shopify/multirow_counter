@@ -25,6 +25,10 @@ module MultirowCounter
 
       # define increment method
       define_method("new_#{counter_name}!") do |incr = 1|
+        if x = instance_variable_get(ivar_name)
+          instance_variable_set(ivar_name, x + incr)
+        end
+
         randomly_selected_counter_row = rand(num_rows) + 1
 
         num_changed = ActiveRecord::Base.connection.update <<-SQL

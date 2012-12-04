@@ -14,24 +14,24 @@ describe MultirowCounter do
   end
 
   it "should allow incrementing" do
-    @shop.increment_version
+    @shop.new_version!
     assert_equal 1, @shop.version
   end
 
   it "supports many increments" do
-    10.times { @shop.increment_version }
+    10.times { @shop.new_version! }
     assert_equal 10, @shop.version
   end
 
   it "supports batch increments" do
-    @shop.increment_version(10)
+    @shop.new_version!(10)
     assert_equal 10, @shop.version
   end
 
   it "should not send all increments to the same row" do
-    10.times { @shop.increment_version }
+    10.times { @shop.new_version! }
 
-    shop_versions = MultirowCounter::ShopVersion.where(:shop_id => @shop.id)
+    shop_versions = ShopVersion.where(:shop_id => @shop.id)
     refute shop_versions.any? { |v| v.value == 10 }
   end
 

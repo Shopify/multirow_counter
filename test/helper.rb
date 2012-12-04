@@ -9,6 +9,9 @@ class Shop < ActiveRecord::Base
   # try adding a second counter
 end
 
+class ShopVersion < ActiveRecord::Base
+end
+
 ActiveRecord::Base.establish_connection(:adapter => 'mysql2', :database => 'counters')
 
 class MiniTest::Unit::TestCase
@@ -27,7 +30,7 @@ class MiniTest::Unit::TestCase
     end
 
     1.upto(3) do |num|
-      MultirowCounter::ShopVersion.create!(:shop_id => @shop.id, :counter_id => num, :value => 0)
+      ShopVersion.create!(:shop_id => @shop.id, :counter_id => num, :value => 0)
     end
 
   end

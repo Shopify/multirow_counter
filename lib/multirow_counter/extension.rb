@@ -33,7 +33,7 @@ module MultirowCounter
         randomly_selected_counter_row = rand(num_rows) + 1
 
         num_changed = ActiveRecord::Base.connection.update <<-SQL
-          UPDATE #{table_name} SET value=value+1
+          UPDATE #{table_name} SET value=value+#{Integer(incr)}
             WHERE #{assoc}=#{self.id} AND counter_id=#{randomly_selected_counter_row}
         SQL
 

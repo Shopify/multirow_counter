@@ -46,5 +46,15 @@ describe MultirowCounter do
   it "defines a second obscure getter" do
     @shop.multirow_counter_version.must_equal @shop.version
   end
+
+  it "resets the memoized value when reloading" do
+    @shop.new_version!
+    @other_instance = Shop.find(@shop.id)
+    @other_instance.new_version!
+
+    @shop.reload
+
+    assert_equal @shop.version, @other_instance.version
+  end
 end
 

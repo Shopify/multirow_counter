@@ -45,6 +45,13 @@ module MultirowCounter
           SQL
         end
       end
+
+      define_method("reload_with_#{counter_name}_reset") do
+        instance_variable_set("@#{counter_name}", nil)
+        send("reload_without_#{counter_name}_reset")
+      end
+
+      alias_method_chain :reload, "#{counter_name}_reset".to_sym
     end
   end
 end

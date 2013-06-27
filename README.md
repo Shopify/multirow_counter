@@ -4,7 +4,7 @@ This is a gem that encapsulates a multi-row counter for SQL.
 
 ## Why?
 
-Typically SQL is not a great place to store a counter that is incremented often. For instance if you're counting the number of visits to a page by incrementing a SQL column and that page gets popular then there's a good chance that the SQL counter will become a benchmark. This is because doing an UPDATE on the row in question locks the row during the course of the UPDATE. So for many concurrent UPDATES there will be lots of lock contention.
+Typically SQL is not a great place to store a counter that is incremented often. For instance if you're counting the number of visits to a page by incrementing a SQL column and that page gets popular then there's a good chance that the SQL counter will become a bottleneck. This is because doing an UPDATE on the row in question locks the row during the course of the UPDATE. So for many concurrent UPDATES there will be lots of lock contention.
 
 ## How?
 

@@ -1,7 +1,7 @@
 
 Gem::Specification.new do |s|
   s.name        = "multirow_counter"
-  s.version     = "0.0.1"
+  s.version     = "0.0.2"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Jesse Storimer"]
   s.email       = ["jesse@shopify.com"]

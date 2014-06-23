@@ -1,6 +1,8 @@
 require 'helper'
 
 describe MultirowCounter do
+  include MultirowCounterTables
+
   before do
     reset_tables
   end
@@ -37,7 +39,7 @@ describe MultirowCounter do
 
   it "requires the number of rows to be specified" do
     class Foo < ActiveRecord::Base
-      lambda { 
+      lambda {
         multirow_counter :the_count, :random => 'oops'
       }.must_raise ArgumentError
     end
